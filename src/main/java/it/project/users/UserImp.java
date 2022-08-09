@@ -2,18 +2,39 @@ package it.project.users;
 
 import java.util.ArrayList;
 
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 
 import it.project.card.SubCardImp;
 import it.project.ticket.SingleTicketImp;
 import it.project.ticket.SubscriptionImp;
 
+
 public class UserImp {
 	
+	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	@Column(name = "id")
+	private Long id;
+	
+	@Column(name = "name")
 	private String name;
+	
+	@Column(name = "surname")
 	private String surname;
+	
+	@Column(name = "dateOfBirth")
 	private String dateOfBirth;
+	
+	@OneToMany
 	private ArrayList<SingleTicketImp> listTicket;
+	
+	@Column(name = "subscription")
 	private SubscriptionImp subscription;
 	
 	@OneToOne	

@@ -1,11 +1,22 @@
 package it.project.ticket;
 
 import java.time.LocalDate;
+
+import javax.persistence.Column;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+
 import it.project.system.DistributorImp;
 import it.project.system.RetailerImp;
 import it.project.users.UserImp;
 
 public class AbstractTicket {
+	
+	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	@Column(name = "id")
+	private Long id;
 	
 	private UserImp user;
 	private String company;
