@@ -1,27 +1,47 @@
 package it.project.users;
 
-import java.util.List;
+import java.util.ArrayList;
 
 import javax.persistence.OneToOne;
+
+import it.project.card.SubCardImp;
+import it.project.ticket.SingleTicketImp;
 
 public class UserImp {
 	private String name;
 	private String surname;
 	private String dateOfBirth;
+	private ArrayList<SingleTicketImp> listTicket;
 		
 	@OneToOne	
-	private List<UserImp> user;
+	private SubCardImp card;
 
-	public UserImp(String name, String surname, String dateOfBirth, List<UserImp> user) {
-		super();
+	public UserImp(String name, String surname, String dateOfBirth, SubCardImp card) {
 		this.name = name;
 		this.surname = surname;
 		this.dateOfBirth = dateOfBirth;
-		this.user = user;
+		this.card = card;
+		this.listTicket = new ArrayList<SingleTicketImp>();
+	}
+
+	public ArrayList<SingleTicketImp> getListTicket() {
+		return listTicket;
+	}
+
+	public void setListTicket(ArrayList<SingleTicketImp> listTicket) {
+		this.listTicket = listTicket;
+	}
+	
+	public SubCardImp getCard() {
+		return card;
+	}
+
+	public void setCard(SubCardImp card) {
+		this.card = card;
 	}
 
 	public UserImp() {
-		super();
+		this.listTicket = new ArrayList<SingleTicketImp>();
 	}
 
 	public String getName() {
@@ -48,12 +68,12 @@ public class UserImp {
 		this.dateOfBirth = dateOfBirth;
 	}
 
-	public List<UserImp> getUser() {
-		return user;
+	public SubCardImp getUser() {
+		return card;
 	}
 
-	public void setUser(List<UserImp> user) {
-		this.user = user;
+	public void setUser(SubCardImp card) {
+		this.card = card;
 	}
 	
 	
