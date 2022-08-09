@@ -14,12 +14,12 @@ public class SubCardImp {
 	@OneToOne
 	UserImp user;
 
-	public SubCardImp(String company, int cardCode, LocalDate cardEmitDate, LocalDate cardValidity, UserImp user) {
+	public SubCardImp(String company, int cardCode, LocalDate cardEmitDate, UserImp user) {
 		super();
 		this.company = company;
 		this.cardCode = cardCode;
 		this.cardEmitDate = cardEmitDate;
-		this.cardValidity = cardValidity;
+		this.cardValidity = cardEmitDate.plusYears(1);
 		this.user = user;
 	}
 
@@ -65,7 +65,14 @@ public class SubCardImp {
 
 	public void setUser(UserImp user) {
 		this.user = user;
-	}	
+	}
+	
+	public boolean checkStatus() {
+		if (LocalDate.now().isAfter(this.cardValidity)) {
+			return false;
+		}
+		return true;
+	}
 	
 	
 }

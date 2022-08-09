@@ -5,6 +5,5 @@ import it.project.users.UserImp;
 public interface Software {
 	
 	void emitSingleTicket(UserImp user);
-	void emitSubscription();
-	void checkValidity();
+	void emitSubscription(UserImp user);
 }

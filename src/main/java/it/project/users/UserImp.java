@@ -6,15 +6,26 @@ import javax.persistence.OneToOne;
 
 import it.project.card.SubCardImp;
 import it.project.ticket.SingleTicketImp;
+import it.project.ticket.SubscriptionImp;
 
 public class UserImp {
+	
 	private String name;
 	private String surname;
 	private String dateOfBirth;
 	private ArrayList<SingleTicketImp> listTicket;
-		
+	private SubscriptionImp subscription;
+	
 	@OneToOne	
 	private SubCardImp card;
+		
+	public SubscriptionImp getSubscription() {
+		return subscription;
+	}
+
+	public void setSubscription(SubscriptionImp subscription) {
+		this.subscription = subscription;
+	}
 
 	public UserImp(String name, String surname, String dateOfBirth, SubCardImp card) {
 		this.name = name;

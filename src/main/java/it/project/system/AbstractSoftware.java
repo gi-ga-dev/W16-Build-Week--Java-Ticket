@@ -1,6 +1,7 @@
 package it.project.system;
 
 import it.project.ticket.SingleTicketImp;
+import it.project.ticket.SubscriptionImp;
 import it.project.users.UserImp;
 
 public class AbstractSoftware implements Software {
@@ -19,13 +20,13 @@ public class AbstractSoftware implements Software {
 	}
 
 	@Override
-	public void emitSubscription() {
-		
-	}
-
-	@Override
-	public void checkValidity() {
-		
+	public void emitSubscription(UserImp user) {
+		if (user.getCard().checkStatus()) {
+			SubscriptionImp subscription = new SubscriptionImp();
+			user.setSubscription(subscription);
+		} else {
+			System.out.println("carta scaduta");
+		}
 	}
 
 	public DistributorStatus getStatus() {
