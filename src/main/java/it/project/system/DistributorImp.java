@@ -1,6 +1,6 @@
 package it.project.system;
 
-public class DistributorImp extends SoftwareImp {
+public class DistributorImp extends AbstractSoftware {
 
 	
 }

@@ -1,6 +1,6 @@
 package it.project.system;
 
-public abstract class SoftwareImp implements Software {
+public abstract class AbstractSoftware implements Software {
 
 	private String emitLocation;
 	
