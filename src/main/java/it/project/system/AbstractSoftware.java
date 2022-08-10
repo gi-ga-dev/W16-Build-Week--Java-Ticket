@@ -1,10 +1,9 @@
 package it.project.system;
 
+import it.project.card_and_user.UserImp;
 import it.project.ticket.SingleTicketImp;
 import it.project.ticket.SubscriptionImp;
-import it.project.ticketDAO.SingleTicketDAO;
-import it.project.ticketDAO.SubscriptionDAO;
-import it.project.users.UserImp;
+
 
 public class AbstractSoftware implements Software {
 
@@ -19,8 +18,6 @@ public class AbstractSoftware implements Software {
 	public void emitSingleTicket(UserImp user) {
 		SingleTicketImp ticket = new SingleTicketImp();
 		user.getListTicket().add(ticket);
-		SingleTicketDAO dao = new SingleTicketDAO();
-		dao.save(ticket);
 	}
 
 	@Override
@@ -28,8 +25,6 @@ public class AbstractSoftware implements Software {
 		if (user.getCard().checkStatus()) {
 			SubscriptionImp subscription = new SubscriptionImp();
 			user.setSubscription(subscription);
-			SubscriptionDAO dao = new SubscriptionDAO();
-			dao.save(subscription);
 		} else {
 			System.out.println("carta scaduta");
 		}
