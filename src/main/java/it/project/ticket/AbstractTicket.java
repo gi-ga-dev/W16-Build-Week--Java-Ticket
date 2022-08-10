@@ -1,9 +1,10 @@
 package it.project.ticket;
 
 import java.time.LocalDate;
+
+import it.project.card_and_user.UserImp;
 import it.project.system.DistributorImp;
 import it.project.system.RetailerImp;
-import it.project.users.UserImp;
 
 public class AbstractTicket {
 	
