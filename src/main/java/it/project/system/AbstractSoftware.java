@@ -1,23 +1,52 @@
 package it.project.system;
 
-public abstract class AbstractSoftware implements Software {
+import it.project.card_and_user.UserImp;
+import it.project.ticket.SingleTicketImp;
+import it.project.ticket.SubscriptionImp;
 
+
+public class AbstractSoftware implements Software {
+
+	private DistributorStatus status;
 	private String emitLocation;
 	
+	public AbstractSoftware() {
+		this.status = DistributorStatus.ACTIVE;
+	}
+	
 	@Override
-	public void emitSingleTicket() {		
-		
+	public void emitSingleTicket(UserImp user) {
+		SingleTicketImp ticket = new SingleTicketImp();
+		user.getListTicket().add(ticket);
 	}
 
 	@Override
-	public void emitSubscription() {
-		
+	public void emitSubscription(UserImp user) {
+		if (user.getCard().checkStatus()) {
+			SubscriptionImp subscription = new SubscriptionImp();
+			user.setSubscription(subscription);
+		} else {
+			System.out.println("carta scaduta");
+		}
 	}
 
-	@Override
-	public void checkValidity() {
-		
+	public DistributorStatus getStatus() {
+		return status;
 	}
+
+	public void setStatus(DistributorStatus status) {
+		this.status = status;
+	}
+
+	public String getEmitLocation() {
+		return emitLocation;
+	}
+
+	public void setEmitLocation(String emitLocation) {
+		this.emitLocation = emitLocation;
+	}
+	
+	
 
 	
 }

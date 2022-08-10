@@ -1,9 +1,21 @@
 package it.project.card_and_user;
 
 import java.time.LocalDate;
+
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
 import javax.persistence.OneToOne;
 
+
 public class CardImp {
+	
+	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	@Column(name = "id")
+	private Long id;
 	
 	private String company;
 	private int cardCode;	
@@ -13,12 +25,12 @@ public class CardImp {
 	@OneToOne
 	UserImp user;
 
-	public CardImp(String company, int cardCode, LocalDate cardEmitDate, LocalDate cardValidity, UserImp user) {
+	public CardImp(String company, int cardCode, LocalDate cardEmitDate, UserImp user) {
 		super();
 		this.company = company;
 		this.cardCode = cardCode;
 		this.cardEmitDate = cardEmitDate;
-		this.cardValidity = cardValidity;
+		this.cardValidity = cardEmitDate.plusYears(1);
 		this.user = user;
 	}
 
@@ -64,7 +76,14 @@ public class CardImp {
 
 	public void setUser(UserImp user) {
 		this.user = user;
-	}	
+	}
+	
+	public boolean checkStatus() {
+		if (LocalDate.now().isAfter(this.cardValidity)) {
+			return false;
+		}
+		return true;
+	}
 	
 	
 }

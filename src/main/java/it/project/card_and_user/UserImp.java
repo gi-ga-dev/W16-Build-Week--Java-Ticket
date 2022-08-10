@@ -1,49 +1,78 @@
 package it.project.card_and_user;
 
-import java.util.List;
+import java.util.ArrayList;
+
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.Inheritance;
-import javax.persistence.InheritanceType;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
-import javax.persistence.SequenceGenerator;
 
-@Entity
-@Inheritance(strategy = InheritanceType.TABLE_PER_CLASS)
+import it.project.ticket.SingleTicketImp;
+import it.project.ticket.SubscriptionImp;
+
+
 public class UserImp {
-	private String name;
-	private String surname;
-	private String dateOfBirth;
-		
-	@OneToMany
-	private List<UserImp> user;
 	
 	@Id
-	@SequenceGenerator(name = "user_seq", sequenceName = "user_seq", allocationSize = 1)
-	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "user_seq")
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	@Column(name = "id")
 	private Long id;
+	
+	@Column(name = "name")
+	private String name;
+	
+	@Column(name = "surname")
+	private String surname;
+	
+	@Column(name = "dateOfBirth")
+	private String dateOfBirth;
+	
+	@OneToMany
+	private ArrayList<SingleTicketImp> listTicket;
+	
+	@Column(name = "subscription")
+	private SubscriptionImp subscription;
+	
+	@OneToOne	
+	private CardImp card;
+		
+	public SubscriptionImp getSubscription() {
+		return subscription;
+	}
 
-	public UserImp(String name, String surname, String dateOfBirth, List<UserImp> user) {
-		super();
+	public void setSubscription(SubscriptionImp subscription) {
+		this.subscription = subscription;
+	}
+
+	public UserImp(String name, String surname, String dateOfBirth, CardImp card) {
 		this.name = name;
 		this.surname = surname;
 		this.dateOfBirth = dateOfBirth;
-		this.user = user;
+		this.card = card;
+		this.listTicket = new ArrayList<SingleTicketImp>();
+	}
+
+	public ArrayList<SingleTicketImp> getListTicket() {
+		return listTicket;
+	}
+
+	public void setListTicket(ArrayList<SingleTicketImp> listTicket) {
+		this.listTicket = listTicket;
+	}
+	
+	public CardImp getCard() {
+		return card;
+	}
+
+	public void setCard(CardImp card) {
+		this.card = card;
 	}
 
 	public UserImp() {
-		super();
-	}	
-
-	public Long getId() {		
-		return id;
-	}
-
-	public void setId(Long id) {
-		this.id = id;
+		this.listTicket = new ArrayList<SingleTicketImp>();
 	}
 
 	public String getName() {
@@ -54,7 +83,6 @@ public class UserImp {
 		this.name = name;
 	}
 
-	
 	public String getSurname() {
 		return surname;
 	}
@@ -71,19 +99,12 @@ public class UserImp {
 		this.dateOfBirth = dateOfBirth;
 	}
 
-	public List<UserImp> getUser() {
-		return user;
+	public CardImp getUser() {
+		return card;
 	}
 
-	public void setUser(List<UserImp> user) {
-		this.user = user;
-	}
-	
-	
-	@Override
-	public String toString() {
-		return "UserImp [name=" + name + ", surname=" + surname + ", dateOfBirth=" + dateOfBirth + ", user=" + user
-				+ ", id=" + id + "]";
+	public void setUser(CardImp card) {
+		this.card = card;
 	}
 	
 	

@@ -7,6 +7,8 @@ import org.slf4j.LoggerFactory;
 
 import it.project.util.JpaUtil;
 
+
+
 public class GenericDAO <E, C> {	
 	
 	//tipizzazione di tipo Class per refer. nel metodo update

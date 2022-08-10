@@ -1,6 +1,6 @@
 package it.project.system;
 
-public enum DistributorValidity {
+public enum DistributorStatus {
 	ACTIVE,
 	INACTIVE
 }	
