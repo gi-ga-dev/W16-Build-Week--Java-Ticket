@@ -16,14 +16,12 @@ public class Main {
 		
 		userDAO.delete(user1);
 		
-<<<<<<< HEAD
 		// JFDNDVDKVNFDJVNVJFBNJFGBFJtbrgbgrb
 		//kdmvkomvmwkdovmkeoemv
-=======
+
 		// JFDNDVDKVNFDJVNVJFBNJFGBFJ
 		//ciao
-				
->>>>>>> branch 'master' of https://github.com/gi-ga-dev/W16-Build-Week--Java-Ticket.git
+			
 	}
 
 }
