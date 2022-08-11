@@ -15,8 +15,8 @@ public class SubscriptionImp extends AbstractTicket {
 	private CardImp card;
 
 	public SubscriptionImp(String company, int code, int price, LocalDate emitDate, LocalDate expDate,
-			Duration duration, CardImp card, UserImp user) {
-		super(company, code, price, emitDate, expDate, user);		
+			Duration duration, CardImp card) {
+		super(company, code, price, emitDate, expDate);		
 		this.duration = duration;
 		this.card = card;
 	}
