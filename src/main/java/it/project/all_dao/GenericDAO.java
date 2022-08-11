@@ -7,8 +7,6 @@ import org.slf4j.LoggerFactory;
 
 import it.project.util.JpaUtil;
 
-
-
 public class GenericDAO <E, C> {	
 	
 	//tipizzazione di tipo Class per refer. nel metodo update
@@ -31,7 +29,7 @@ public class GenericDAO <E, C> {
 		try {
 			EntityTransaction transaction = em.getTransaction();
 			transaction.begin();
-			em.persist(ele);
+			em.persist(ele);			
 			transaction.commit();
 		} catch (Exception ex) {
 			em.getTransaction().rollback();

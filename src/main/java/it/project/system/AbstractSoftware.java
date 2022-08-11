@@ -29,24 +29,15 @@ public class AbstractSoftware implements Software {
 			System.out.println("carta scaduta");
 		}
 	}
-
-	public DistributorStatus getStatus() {
-		return status;
-	}
-
-	public void setStatus(DistributorStatus status) {
-		this.status = status;
-	}
-
-	public String getEmitLocation() {
-		return emitLocation;
-	}
-
-	public void setEmitLocation(String emitLocation) {
-		this.emitLocation = emitLocation;
-	}
 	
+	// ====== Getters ======
 	
+	public DistributorStatus getStatus() { return status; }
+	public String getEmitLocation() { return emitLocation; }
+	
+	// ====== Setters ======	
 
+	public void setStatus(DistributorStatus status) { this.status = status;	}
+	public void setEmitLocation(String emitLocation) { this.emitLocation = emitLocation; }
 	
 }

@@ -1,7 +1,7 @@
 package it.project.card_and_user;
 
 import java.util.ArrayList;
-
+import java.util.List;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -9,17 +9,18 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
-
+import javax.persistence.SequenceGenerator;
 import it.project.ticket.SingleTicketImp;
 import it.project.ticket.SubscriptionImp;
 
-
+@Entity
 public class UserImp {
 	
 	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	@SequenceGenerator(name = "user_seq", sequenceName = "user_seq", allocationSize = 1)
+	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "user_seq")
 	@Column(name = "id")
-	private Long id;
+	private long id;
 	
 	@Column(name = "name")
 	private String name;
@@ -31,82 +32,42 @@ public class UserImp {
 	private String dateOfBirth;
 	
 	@OneToMany
-	private ArrayList<SingleTicketImp> listTicket;
+	private List<SingleTicketImp> listTicket;
 	
-	@Column(name = "subscription")
+	@OneToOne	
 	private SubscriptionImp subscription;
 	
 	@OneToOne	
 	private CardImp card;
 		
-	public SubscriptionImp getSubscription() {
-		return subscription;
-	}
-
-	public void setSubscription(SubscriptionImp subscription) {
+	public UserImp(String name, String surname, String dateOfBirth, CardImp card, SubscriptionImp subscription) {
+		this.name = name;
+		this.surname = surname;
+		this.dateOfBirth = dateOfBirth;
+		this.card = card;
 		this.subscription = subscription;
-	}
-
-	public UserImp(String name, String surname, String dateOfBirth, CardImp card) {
-		this.name = name;
-		this.surname = surname;
-		this.dateOfBirth = dateOfBirth;
-		this.card = card;
 		this.listTicket = new ArrayList<SingleTicketImp>();
 	}
-
-	public ArrayList<SingleTicketImp> getListTicket() {
-		return listTicket;
-	}
-
-	public void setListTicket(ArrayList<SingleTicketImp> listTicket) {
-		this.listTicket = listTicket;
-	}
 	
-	public CardImp getCard() {
-		return card;
-	}
-
-	public void setCard(CardImp card) {
-		this.card = card;
-	}
-
-	public UserImp() {
-		this.listTicket = new ArrayList<SingleTicketImp>();
-	}
-
-	public String getName() {
-		return name;
-	}
-
-	public void setName(String name) {
-		this.name = name;
-	}
-
-	public String getSurname() {
-		return surname;
-	}
-
-	public void setSurname(String surname) {
-		this.surname = surname;
-	}
-
-	public String getDateOfBirth() {
-		return dateOfBirth;
-	}
-
-	public void setDateOfBirth(String dateOfBirth) {
-		this.dateOfBirth = dateOfBirth;
-	}
-
-	public CardImp getUser() {
-		return card;
-	}
-
-	public void setUser(CardImp card) {
-		this.card = card;
-	}
+	public UserImp() { this.listTicket = new ArrayList<SingleTicketImp>(); }
 	
+	// ====== Getters ======
 	
+	public long getId() { return id; }
+	public String getName() { return name; }
+	public String getSurname() { return surname; }
+	public String getDateOfBirth() { return dateOfBirth; }
+	public CardImp getCard() { return card;	}
+	public SubscriptionImp getSubscription() { return subscription;	}
+	public List<SingleTicketImp> getListTicket() { return listTicket; }
+		
+	// ====== Setters ======	
+	
+	public void setName(String name) { this.name = name; }
+	public void setSurname(String surname) { this.surname = surname; }
+	public void setDateOfBirth(String dateOfBirth) { this.dateOfBirth = dateOfBirth; }
+	public void setCard(CardImp card) { this.card = card; }
+	public void setSubscription(SubscriptionImp subscription) {	this.subscription = subscription; }
+	public void setListTicket(List<SingleTicketImp> listTicket) { this.listTicket = listTicket;	}
 }
 
