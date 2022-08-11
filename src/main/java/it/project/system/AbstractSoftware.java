@@ -70,9 +70,9 @@ public abstract class AbstractSoftware implements Software {
 	}
 		
 	@Override
-	public void emitSingleTicket(String company, int code, int price, LocalDate emitDate, LocalDate expDate, UserImp user) {
-		SingleTicketImp ticket = new SingleTicketImp(company, code, price, emitDate, expDate, user);
-		user.getListTicket().add(ticket);
+	public void emitSingleTicket(String company, int code, int price, LocalDate emitDate, LocalDate expDate) {
+		SingleTicketImp ticket = new SingleTicketImp(company, code, price, emitDate, expDate);
+		//user.getListTicket().add(ticket);
 		SingleTicketDAO ticketDAO = new SingleTicketDAO();
 		ticketDAO.create(ticket);
 	}

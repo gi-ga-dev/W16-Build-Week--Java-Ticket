@@ -12,7 +12,7 @@ import it.project.ticket.SubscriptionImp;
 @Entity
 public class RetailerImp extends AbstractSoftware {
 
-	public RetailerImp(String emitLocation, List<AbstractTicket> listTicket, List<AbstractTicket> listSubs, LocalDate ticketsTime) {
+	public RetailerImp(String emitLocation, List<SingleTicketImp> listTicket, List<SubscriptionImp> listSubs, LocalDate ticketsTime) {
 		super(emitLocation, listTicket, listSubs, ticketsTime);		
 	}
 	

@@ -34,8 +34,6 @@ public abstract class AbstractTicket {
 	private LocalDate emitDate;
 	@Column(name = "expDate")
 	private LocalDate expDate;
-	@Column(name = "user")
-	private UserImp user;
 	
 	@ManyToOne
 	private RetailerImp retailer;
@@ -43,14 +41,13 @@ public abstract class AbstractTicket {
 	@ManyToOne
 	private DistributorImp distributor;
 	
-	public AbstractTicket(String company, int code, int price, LocalDate emitDate, LocalDate expDate, UserImp user) {
+	public AbstractTicket(String company, int code, int price, LocalDate emitDate, LocalDate expDate) {
 		super();		
 		this.company = company;
 		this.code = code;
 		this.price = price;
 		this.emitDate = emitDate;
 		this.expDate = expDate;
-		this.user = user;
 	}	
 
 	public AbstractTicket() {

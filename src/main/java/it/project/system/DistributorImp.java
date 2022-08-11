@@ -12,7 +12,7 @@ import it.project.ticket.SubscriptionImp;
 @Entity
 public class DistributorImp extends AbstractSoftware {
 			
-	public DistributorImp(DistributorStatus status, String emitLocation, List<AbstractTicket> listTicket, List<AbstractTicket> listSubs, LocalDate ticketsTime) {
+	public DistributorImp(DistributorStatus status, String emitLocation, List<SingleTicketImp> listTicket, List<SubscriptionImp> listSubs, LocalDate ticketsTime) {
 		super(status, emitLocation, listTicket, listSubs, ticketsTime);		
 	}
 	
