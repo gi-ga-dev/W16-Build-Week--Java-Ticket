@@ -4,6 +4,7 @@ import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -32,11 +33,11 @@ public abstract class AbstractSoftware implements Software {
 	@Column(name = "id")
 	private Long id;
 	
-	@OneToMany
+	@OneToMany(cascade = CascadeType.MERGE)
 	@Column(name = "subs_list")
 	private List<SubscriptionImp> listSubs;	
 	
-	@OneToMany
+	@OneToMany(cascade = CascadeType.MERGE)
 	@Column(name = "tickets_list")
 	private List<SingleTicketImp> listTicket;	
 	
@@ -72,7 +73,7 @@ public abstract class AbstractSoftware implements Software {
 	@Override
 	public void emitSingleTicket(String company, int code, int price, LocalDate emitDate, LocalDate expDate) {
 		SingleTicketImp ticket = new SingleTicketImp(company, code, price, emitDate, expDate);
-		//user.getListTicket().add(ticket);
+		//getListTicket().add(ticket);
 		SingleTicketDAO ticketDAO = new SingleTicketDAO();
 		ticketDAO.create(ticket);
 	}

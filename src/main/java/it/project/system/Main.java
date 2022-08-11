@@ -46,15 +46,17 @@ public class Main {
 		userServ.getClaudio().setCard(cardServ.getCardClaudio()); // associo carta all'utente
 		cardServ.getCardClaudio().setUser(userServ.getClaudio()); // associo utente alla carta
 		
-		// ====== Distributor / Retailer ======		
+		// ====== Distributor / Retailer ======	
 		
-		DistributorImp distributor = new DistributorImp();		
-		DistributorImp distributor1 = new DistributorImp(DistributorStatus.ACTIVE, "Firenze", distributor.getListTicket(), distributor.getListSubs(), LocalDate.now());
-		distributor1.emitSingleTicket("Cotral", 1, 3, LocalDate.now(), LocalDate.now().plusYears(1));
-		distributor1.emitSubscription("AutoGuidoVie", 1, 5, LocalDate.now(), LocalDate.now().plusYears(1), Duration.MONTHLY, cardServ.getCardClaudio());
-			
-		distDAO.create(distributor1);
+		distDAO.create(distServ.getDistributor1());
 		
+		distServ.getDistributor1().emitSingleTicket("Cotral", 1, 3, LocalDate.now(), LocalDate.now().plusYears(1));
+		distServ.getDistributor1().emitSubscription("AutoGuidoVie", 1, 5, LocalDate.now(), LocalDate.now().plusYears(1), Duration.MONTHLY, cardServ.getCardClaudio());
+		
+		distServ.getDistributor1().setListTicket(distServ.getDistributor1().getListTicket());
+		distServ.getDistributor1().setListSubs(distServ.getDistributor1().getListSubs());
+		
+		distDAO.update(distServ.getDistributor1());
 		
 		RetailerImp retailer = new RetailerImp();
 		retailer.emitSingleTicket("Cotral", 1, 3, LocalDate.now(), LocalDate.now().plusYears(1));
