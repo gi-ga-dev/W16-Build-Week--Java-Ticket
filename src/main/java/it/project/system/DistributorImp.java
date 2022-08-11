@@ -1,24 +1,23 @@
 package it.project.system;
 
 import java.time.LocalDate;
+import java.util.List;
 
-import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.SequenceGenerator;
 
-import it.project.card_and_user.UserImp;
+import it.project.ticket.AbstractTicket;
+import it.project.ticket.SingleTicketImp;
+import it.project.ticket.SubscriptionImp;
 
 @Entity
 public class DistributorImp extends AbstractSoftware {
+			
+	public DistributorImp(DistributorStatus status, String emitLocation, List<SingleTicketImp> listTicket, List<SubscriptionImp> listSubs, LocalDate ticketsTime) {
+		super(status, emitLocation, listTicket, listSubs, ticketsTime);		
+	}
 	
-	@Id
-	@SequenceGenerator(name = "dis_seq", sequenceName = "dis_seq", allocationSize = 1)
-	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "dis_seq")
-	@Column(name = "id")
-	private Long id;	
-
+	public DistributorImp() {
+		super();
+	}
 	
 }
