@@ -33,11 +33,7 @@ public class UserImp {
 	
 	@Column(name = "dateOfBirth")
 	private String dateOfBirth;
-	
-	// quando una classe e' correlata con una lista si creare un table con i lock in piu' (con mappedBy lo rimuovi)
-	@OneToMany(fetch = FetchType.LAZY, mappedBy = "user")
-	private List<SingleTicketImp> listTicket;
-		
+			
 	@OneToOne	
 	private CardImp card;	
 		
@@ -46,20 +42,17 @@ public class UserImp {
 		this.surname = surname;
 		this.dateOfBirth = dateOfBirth;
 		this.card = card;
-		// quando istanzio un oggetto user crea una lista vuota
-		this.listTicket = new ArrayList<SingleTicketImp>();
 	}
 	
-	public UserImp() { this.listTicket = new ArrayList<SingleTicketImp>(); }
+	public UserImp() { super();	}	
 		
 	// ====== Getters ======
-	
+
 	public long getId() { return id; }
 	public String getName() { return name; }
 	public String getSurname() { return surname; }
 	public String getDateOfBirth() { return dateOfBirth; }
 	public CardImp getCard() { return card;	}
-	public List<SingleTicketImp> getListTicket() { return listTicket; }
 		
 	// ====== Setters ======	
 	
@@ -67,6 +60,6 @@ public class UserImp {
 	public void setSurname(String surname) { this.surname = surname; }
 	public void setDateOfBirth(String dateOfBirth) { this.dateOfBirth = dateOfBirth; }
 	public void setCard(CardImp card) { this.card = card; }
-	public void setListTicket(List<SingleTicketImp> listTicket) { this.listTicket = listTicket;	}
+	
 }
 

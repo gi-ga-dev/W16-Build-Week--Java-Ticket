@@ -37,7 +37,8 @@ public class CardImp {
 	private LocalDate cardEmitDate;
 	@Column(name = "validity")
 	private LocalDate cardValidity; // LocalDate.now().plusYears(1)
-		
+	
+	// quando una classe e' correlata con una lista si creare un table con i lock in piu' (con mappedBy lo rimuovi)	
 	@OneToMany(fetch = FetchType.LAZY, mappedBy = "card") // si riferisce alla prop. card (in SubscriptionImp)
 	private List<SubscriptionImp> listSubs;
 	
@@ -50,7 +51,7 @@ public class CardImp {
 		this.cardCode = cardCode;
 		this.cardEmitDate = cardEmitDate;
 		this.cardValidity = cardEmitDate.plusYears(1);
-		this.listSubs = new ArrayList<>();
+		this.listSubs = new ArrayList<SubscriptionImp>();
 		this.user = user;
 	}
 

@@ -6,8 +6,12 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.ManyToOne;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
+
+import it.project.system.DistributorImp;
+import it.project.system.RetailerImp;
 
 @Entity
 @Table(name="tickets_and_subs", schema="ele_transport")
@@ -19,7 +23,6 @@ public abstract class AbstractTicket {
 	@Column(name = "id")
 	private Long id;	
 	
-	//private UserImp user;
 	@Column(name = "company")
 	private String company;
 	@Column(name = "code")
@@ -30,11 +33,13 @@ public abstract class AbstractTicket {
 	private LocalDate emitDate;
 	@Column(name = "expDate")
 	private LocalDate expDate;
-	// per sapere se lo ha emesso il dist. o il retailer
-	// istanziare distributori e retailers nel main e passare nei parametri del ticket
-	//private DistributorImp distributor;
-	//private RetailerImp retailer;	
-
+	
+	@ManyToOne
+	private RetailerImp retailer;
+	
+	@ManyToOne
+	private DistributorImp distributor;
+	
 	public AbstractTicket(String company, int code, int price, LocalDate emitDate, LocalDate expDate) {
 		super();		
 		this.company = company;

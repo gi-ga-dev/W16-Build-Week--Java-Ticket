@@ -1,14 +1,9 @@
 package it.project.ticket;
 
 import java.time.LocalDate;
-
-import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.ManyToOne;
-import javax.persistence.OneToOne;
-
 import it.project.card_and_user.CardImp;
-import it.project.card_and_user.UserImp;
 
 @Entity
 public class SubscriptionImp extends AbstractTicket {

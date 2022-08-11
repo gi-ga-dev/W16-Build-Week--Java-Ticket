@@ -1,5 +1,6 @@
 package it.project.system;
 
+import java.io.ObjectInputFilter.Status;
 import java.time.LocalDate;
 
 import it.project.all_dao.CardDAO;
@@ -35,10 +36,15 @@ public class Main {
 				
 		userServ.getClaudio().setCard(cardServ.getCardClaudio()); // associo carta all'utente
 		cardServ.getCardClaudio().setUser(userServ.getClaudio()); // associo utente alla carta
-
-		DistributorImp dis = new DistributorImp();				
-		dis.emitSingleTicket("Cotral", 1, 3, LocalDate.now(), LocalDate.now().plusYears(1), userServ.getClaudio());
-		dis.emitSubscription("AutoGuidoVie", 1, 5, LocalDate.now(), LocalDate.now().plusYears(1), Duration.MONTHLY, cardServ.getCardClaudio());
+		
+		DistributorImp distributor = new DistributorImp();		
+		DistributorImp distributor1 = new DistributorImp(DistributorStatus.ACTIVE, "Firenze", distributor.getListTicket(), distributor.getListSubs(), LocalDate.now());
+		distributor1.emitSingleTicket("Cotral", 1, 3, LocalDate.now(), LocalDate.now().plusYears(1));
+		distributor1.emitSubscription("AutoGuidoVie", 1, 5, LocalDate.now(), LocalDate.now().plusYears(1), Duration.MONTHLY, cardServ.getCardClaudio());
+		
+		RetailerImp retailer = new RetailerImp();
+		retailer.emitSingleTicket("Cotral", 1, 3, LocalDate.now(), LocalDate.now().plusYears(1));
+		retailer.emitSubscription("AutoGuidoVie", 1, 5, LocalDate.now(), LocalDate.now().plusYears(1), Duration.MONTHLY, cardServ.getCardClaudio());
 		
 		cardDAO.update(cardServ.getCardClaudio()); // aggiorno carta
 		userDAO.update(userServ.getClaudio());     // aggiorno utente			
