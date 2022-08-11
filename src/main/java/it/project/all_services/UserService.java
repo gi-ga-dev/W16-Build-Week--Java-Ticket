@@ -6,11 +6,11 @@ public class UserService {
 	
 	// Creare metodo per la creazione di oggetti
 	
-	private UserImp claudio = new UserImp("Claudio", "Licheri", "14/12/1995", null, null, null);
-	private UserImp elois = new UserImp("Elois", "Mandotti", "10/09/1998", null, null, null);
-	private UserImp gianluca = new UserImp("Gianluca", "Gallone", "17/04/1992", null, null, null);
-	private UserImp emanuel = new UserImp("Emanuel", "Tancau", "07/11/1998", null, null, null);
-	private UserImp massimiliano = new UserImp("Massimiliano", "Zingali", "14/05/1985", null, null, null);
+	private UserImp claudio = new UserImp("Claudio", "Licheri", "14/12/1995", null);
+	private UserImp elois = new UserImp("Elois", "Mandotti", "10/09/1998", null);
+	private UserImp gianluca = new UserImp("Gianluca", "Gallone", "17/04/1992", null);
+	private UserImp emanuel = new UserImp("Emanuel", "Tancau", "07/11/1998", null);
+	private UserImp massimiliano = new UserImp("Massimiliano", "Zingali", "14/05/1985", null);
 	
 	// ====== Getters ======
 	

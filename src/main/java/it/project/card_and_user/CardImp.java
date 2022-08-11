@@ -1,16 +1,22 @@
 package it.project.card_and_user;
 
 import java.time.LocalDate;
+import java.util.ArrayList;
+import java.util.List;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 
+import it.project.ticket.SingleTicketImp;
 import it.project.ticket.SubscriptionImp;
 
 @Entity
@@ -32,10 +38,10 @@ public class CardImp {
 	@Column(name = "validity")
 	private LocalDate cardValidity; // LocalDate.now().plusYears(1)
 		
-	@OneToOne
-	private SubscriptionImp subscription;
+	@OneToMany(fetch = FetchType.LAZY, mappedBy = "card") // si riferisce alla prop. card (in SubscriptionImp)
+	private List<SubscriptionImp> listSubs;
 	
-	@ManyToOne
+	@OneToOne
 	private UserImp user;
 
 	public CardImp(String company, int cardCode, LocalDate cardEmitDate, UserImp user) {
@@ -44,6 +50,7 @@ public class CardImp {
 		this.cardCode = cardCode;
 		this.cardEmitDate = cardEmitDate;
 		this.cardValidity = cardEmitDate.plusYears(1);
+		this.listSubs = new ArrayList<>();
 		this.user = user;
 	}
 
@@ -57,19 +64,21 @@ public class CardImp {
 	}
 	
 	// ====== Getters ======
-	
+		
 	public UserImp getUser() { return user;	}
 	public String getCompany() { return company; }
 	public int getCardCode() { return cardCode;	}
 	public LocalDate getCardEmitDate() { return cardEmitDate; }
 	public LocalDate getCardValidity() { return cardValidity; }
+	public List<SubscriptionImp> getListSubs() { return listSubs; }
 	
-	// ====== Setters ======
+	// ====== Setters ======	
 
-	public void setUser(UserImp user) {	this.user = user; }	
+	public void setUser(UserImp user) {	this.user = user; }		
 	public void setCompany(String company) { this.company = company; }	
 	public void setCardCode(int cardCode) {	this.cardCode = cardCode; }	
 	public void setCardEmitDate(LocalDate cardEmitDate) { this.cardEmitDate = cardEmitDate;	}	
 	public void setCardValidity(LocalDate cardValidity) { this.cardValidity = cardValidity;	}	
+	public void setListSubs(List<SubscriptionImp> listSubs) { this.listSubs = listSubs;	}
 	
 }

@@ -20,10 +20,15 @@ public abstract class AbstractTicket {
 	private Long id;	
 	
 	//private UserImp user;
+	@Column(name = "company")
 	private String company;
+	@Column(name = "code")
 	private int code;	
+	@Column(name = "price")
 	private int price;
+	@Column(name = "emitDate")
 	private LocalDate emitDate;
+	@Column(name = "expDate")
 	private LocalDate expDate;
 	// per sapere se lo ha emesso il dist. o il retailer
 	// istanziare distributori e retailers nel main e passare nei parametri del ticket

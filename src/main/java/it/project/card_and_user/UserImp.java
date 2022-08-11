@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -33,24 +34,19 @@ public class UserImp {
 	@Column(name = "dateOfBirth")
 	private String dateOfBirth;
 	
-	@OneToMany
+	// quando una classe e' correlata con una lista si creare un table con i lock in piu' (con mappedBy lo rimuovi)
+	@OneToMany(fetch = FetchType.LAZY, mappedBy = "user")
 	private List<SingleTicketImp> listTicket;
-	
-	@OneToOne	
-	private SubscriptionImp subscription;
-	
-	@OneToOne	
-	private CardImp card;
-	
-	@OneToMany
-	private List<CardImp> listCard;
 		
-	public UserImp(String name, String surname, String dateOfBirth, CardImp card, SubscriptionImp subscription, List<SingleTicketImp> listTicket) {
+	@OneToOne	
+	private CardImp card;	
+		
+	public UserImp(String name, String surname, String dateOfBirth, CardImp card) {
 		this.name = name;
 		this.surname = surname;
 		this.dateOfBirth = dateOfBirth;
 		this.card = card;
-		this.subscription = subscription;
+		// quando istanzio un oggetto user crea una lista vuota
 		this.listTicket = new ArrayList<SingleTicketImp>();
 	}
 	
@@ -63,7 +59,6 @@ public class UserImp {
 	public String getSurname() { return surname; }
 	public String getDateOfBirth() { return dateOfBirth; }
 	public CardImp getCard() { return card;	}
-	public SubscriptionImp getSubscription() { return subscription;	}
 	public List<SingleTicketImp> getListTicket() { return listTicket; }
 		
 	// ====== Setters ======	
@@ -72,7 +67,6 @@ public class UserImp {
 	public void setSurname(String surname) { this.surname = surname; }
 	public void setDateOfBirth(String dateOfBirth) { this.dateOfBirth = dateOfBirth; }
 	public void setCard(CardImp card) { this.card = card; }
-	public void setSubscription(SubscriptionImp subscription) {	this.subscription = subscription; }
 	public void setListTicket(List<SingleTicketImp> listTicket) { this.listTicket = listTicket;	}
 }
 
