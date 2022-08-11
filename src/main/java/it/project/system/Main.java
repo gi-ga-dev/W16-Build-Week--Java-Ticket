@@ -10,9 +10,6 @@ import it.project.all_services.CardService;
 import it.project.all_services.SingleTicketService;
 import it.project.all_services.SubscriptionService;
 import it.project.all_services.UserService;
-import it.project.card_and_user.UserImp;
-import it.project.ticket.Duration;
-import it.project.ticket.SubscriptionImp;
 
 public class Main {
 
@@ -28,31 +25,31 @@ public class Main {
 		UserService userServ = new UserService();		
 		CardService cardServ = new CardService();		
 		SubscriptionService subServ = new SubscriptionService();		
-		SingleTicketService ticketServ = new SingleTicketService();
+		SingleTicketService ticketServ = new SingleTicketService();		
 		
 		// ====== Users =======		
 		// (String name, String surname, String dateOfBirth, CardImp card, SubscriptionImp subscription)
 		userDAO.create(userServ.getClaudio());
 		cardDAO.create(cardServ.getCardClaudio());
+		subDAO.create(subServ.getSubClaudio());
 		
 		userServ.getClaudio().setCard(cardServ.getCardClaudio()); // associo carta all'utente
 		cardServ.getCardClaudio().setUser(userServ.getClaudio()); // associo utente alla carta
+
+		DistributorImp dis = new DistributorImp();
+//		dis.emitSubscription(userServ.getClaudio());                // emetto subscription vuota
+//		subServ.getSubClaudio().setCard(cardServ.getCardClaudio()); // prendo sub e setto carta
+//		subServ.getSubClaudio().setUser(userServ.getClaudio());     // prendo sub e setto utente
+				
+		dis.emitSingleTicket("Cotral", 1, 3, LocalDate.now(), LocalDate.now().plusYears(1), userServ.getClaudio());
+		dis.emitSingleTicket("AutoGuidoVie", 1, 5, LocalDate.now(), LocalDate.now().plusYears(1), userServ.getClaudio());
+				
+		//dis.emitSingleTicket(userServ.getClaudio());
+		//dis.emitSingleTicket(userServ.getClaudio());
 		
 		cardDAO.update(cardServ.getCardClaudio()); // aggiorno carta
 		userDAO.update(userServ.getClaudio());     // aggiorno utente
-		
-		SubscriptionImp subCla = new SubscriptionImp("Cotral", 4959, 2, LocalDate.now(), LocalDate.now().plusYears(1), userServ.getClaudio(), Duration.MONTHLY, cardServ.getCardClaudio());
-		
-				
-		//AbstractSoftware abs = new AbstractSoftware();
-		//abs.emitSubscription(userServ.getClaudio());                // emetto subscription vuota
-		//subServ.getSubClaudio().setCard(cardServ.getCardClaudio()); // prendo sub e setto carta
-		//subServ.getSubClaudio().setUser(userServ.getClaudio());     // prendo sub e setto utente
-		
-		cardDAO.update(cardServ.getCardClaudio()); // aggiorno carta
-		userDAO.update(userServ.getClaudio());     // aggiorno utente
-		subDAO.update(subServ.getSubClaudio());    // aggiorno subscription
-				
+		subDAO.update(subServ.getSubClaudio());    // aggiorno subscription			
 		
 	}
 

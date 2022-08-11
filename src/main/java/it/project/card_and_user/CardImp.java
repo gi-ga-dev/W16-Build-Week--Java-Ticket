@@ -6,12 +6,15 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.ManyToOne;
 import javax.persistence.OneToOne;
 import javax.persistence.SequenceGenerator;
+import javax.persistence.Table;
 
 import it.project.ticket.SubscriptionImp;
 
 @Entity
+@Table(name="cards", schema="ele_transport")
 public class CardImp {
 	
 	@Id
@@ -28,11 +31,11 @@ public class CardImp {
 	private LocalDate cardEmitDate;
 	@Column(name = "validity")
 	private LocalDate cardValidity; // LocalDate.now().plusYears(1)
-	
+		
 	@OneToOne
 	private SubscriptionImp subscription;
 	
-	@OneToOne
+	@ManyToOne
 	private UserImp user;
 
 	public CardImp(String company, int cardCode, LocalDate cardEmitDate, UserImp user) {

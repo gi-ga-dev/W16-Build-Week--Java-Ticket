@@ -10,10 +10,12 @@ import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.SequenceGenerator;
+import javax.persistence.Table;
 import it.project.ticket.SingleTicketImp;
 import it.project.ticket.SubscriptionImp;
 
 @Entity
+@Table(name="users", schema="ele_transport")
 public class UserImp {
 	
 	@Id
@@ -39,8 +41,11 @@ public class UserImp {
 	
 	@OneToOne	
 	private CardImp card;
+	
+	@OneToMany
+	private List<CardImp> listCard;
 		
-	public UserImp(String name, String surname, String dateOfBirth, CardImp card, SubscriptionImp subscription) {
+	public UserImp(String name, String surname, String dateOfBirth, CardImp card, SubscriptionImp subscription, List<SingleTicketImp> listTicket) {
 		this.name = name;
 		this.surname = surname;
 		this.dateOfBirth = dateOfBirth;
@@ -50,7 +55,7 @@ public class UserImp {
 	}
 	
 	public UserImp() { this.listTicket = new ArrayList<SingleTicketImp>(); }
-	
+		
 	// ====== Getters ======
 	
 	public long getId() { return id; }

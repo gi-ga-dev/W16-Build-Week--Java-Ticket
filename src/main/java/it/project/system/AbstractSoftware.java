@@ -1,11 +1,14 @@
 package it.project.system;
 
+import java.time.LocalDate;
+
+import it.project.all_dao.SingleTicketDAO;
 import it.project.card_and_user.UserImp;
 import it.project.ticket.SingleTicketImp;
 import it.project.ticket.SubscriptionImp;
 
 
-public class AbstractSoftware implements Software {
+public abstract class AbstractSoftware implements Software {
 
 	private DistributorStatus status;
 	private String emitLocation;
@@ -14,10 +17,23 @@ public class AbstractSoftware implements Software {
 		this.status = DistributorStatus.ACTIVE;
 	}
 	
+//	@Override
+//	public void emitSingleTicket(String company, int code, int price, LocalDate emitDate, LocalDate expDate,
+//			UserImp user) {
+//		SingleTicketImp ticket = new SingleTicketImp(company, code, price, emitDate, expDate, user);
+//		user.getListTicket().add(ticket);	
+//	
+//		SingleTicketDAO ticketDAO = new SingleTicketDAO();
+//		ticketDAO.create(ticket);
+//	}
+	
 	@Override
-	public void emitSingleTicket(UserImp user) {
-		SingleTicketImp ticket = new SingleTicketImp();
-		user.getListTicket().add(ticket);
+	public void emitSingleTicket(String company, int code, int price, LocalDate emitDate, LocalDate expDate,
+			UserImp user) {
+		SingleTicketImp ticket = new SingleTicketImp(company, code, price, emitDate, expDate, user);
+		user.getListTicket().add(ticket);	
+		SingleTicketDAO ticketDAO = new SingleTicketDAO();
+		ticketDAO.create(ticket);
 	}
 
 	@Override
