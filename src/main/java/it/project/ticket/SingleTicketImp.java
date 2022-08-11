@@ -9,8 +9,8 @@ import it.project.card_and_user.UserImp;
 @Entity
 public class SingleTicketImp extends AbstractTicket {
 	
-	public SingleTicketImp(String company, int code, int price, LocalDate emitDate, LocalDate expDate) {
-		super(company, code, price, emitDate, expDate);		
+	public SingleTicketImp(String company, int code, int price, LocalDate emitDate, LocalDate expDate, UserImp user) {
+		super(company, code, price, emitDate, expDate, user);		
 	}	
 	
 	public SingleTicketImp() {

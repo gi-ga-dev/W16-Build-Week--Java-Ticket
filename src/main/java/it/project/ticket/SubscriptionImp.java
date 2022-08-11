@@ -4,6 +4,7 @@ import java.time.LocalDate;
 import javax.persistence.Entity;
 import javax.persistence.ManyToOne;
 import it.project.card_and_user.CardImp;
+import it.project.card_and_user.UserImp;
 
 @Entity
 public class SubscriptionImp extends AbstractTicket {
@@ -14,8 +15,8 @@ public class SubscriptionImp extends AbstractTicket {
 	private CardImp card;
 
 	public SubscriptionImp(String company, int code, int price, LocalDate emitDate, LocalDate expDate,
-			Duration duration, CardImp card) {
-		super(company, code, price, emitDate, expDate);		
+			Duration duration, CardImp card, UserImp user) {
+		super(company, code, price, emitDate, expDate, user);		
 		this.duration = duration;
 		this.card = card;
 	}

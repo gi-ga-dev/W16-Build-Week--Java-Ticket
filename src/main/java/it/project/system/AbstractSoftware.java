@@ -34,11 +34,11 @@ public abstract class AbstractSoftware implements Software {
 	
 	@OneToMany
 	@Column(name = "subs_list")
-	private List<AbstractTicket> listSubs;	
+	private List<SubscriptionImp> listSubs;	
 	
 	@OneToMany
 	@Column(name = "tickets_list")
-	private List<AbstractTicket> listTicket;	
+	private List<SingleTicketImp> listTicket;	
 	
 	@Column(name = "status")
 	private DistributorStatus status;
@@ -47,22 +47,22 @@ public abstract class AbstractSoftware implements Software {
 	@Column(name = "ticketsTime")
 	private LocalDate ticketsTime;  		// ticket emessi in un dato periodo
 
-	public AbstractSoftware(DistributorStatus status, String emitLocation, List<AbstractTicket> listTicket, List<AbstractTicket> listSubs, LocalDate ticketsTime) {
+	public AbstractSoftware(DistributorStatus status, String emitLocation, List<SingleTicketImp> listTicket, List<SubscriptionImp> listSubs, LocalDate ticketsTime) {
 		super();
 		this.status = status;
 		this.emitLocation = emitLocation;
 		this.ticketsTime = ticketsTime;
 		// quando istanzio un oggetto crea una lista vuota
-		this.listTicket = new ArrayList<AbstractTicket>();
-		this.listSubs = new ArrayList<AbstractTicket>();
+		this.listTicket = new ArrayList<SingleTicketImp>();
+		this.listSubs = new ArrayList<SubscriptionImp>();
 	}
 	
-	public AbstractSoftware(String emitLocation, List<AbstractTicket> listTicket, List<AbstractTicket> listSubs, LocalDate ticketsTime) {
+	public AbstractSoftware(String emitLocation, List<SingleTicketImp> listTicket, List<SubscriptionImp> listSubs, LocalDate ticketsTime) {
 		super();
 		this.emitLocation = emitLocation;
 		this.ticketsTime = ticketsTime;
-		this.listTicket = new ArrayList<AbstractTicket>();
-		this.listSubs = new ArrayList<AbstractTicket>();
+		this.listTicket = new ArrayList<SingleTicketImp>();
+		this.listSubs = new ArrayList<SubscriptionImp>();
 	}
 	
 	public AbstractSoftware() {
@@ -70,9 +70,9 @@ public abstract class AbstractSoftware implements Software {
 	}
 		
 	@Override
-	public void emitSingleTicket(String company, int code, int price, LocalDate emitDate, LocalDate expDate) {
-		SingleTicketImp ticket = new SingleTicketImp(company, code, price, emitDate, expDate);
-		getListTicket().add(ticket);
+	public void emitSingleTicket(String company, int code, int price, LocalDate emitDate, LocalDate expDate, UserImp user) {
+		SingleTicketImp ticket = new SingleTicketImp(company, code, price, emitDate, expDate, user);
+		user.getListTicket().add(ticket);
 		SingleTicketDAO ticketDAO = new SingleTicketDAO();
 		ticketDAO.create(ticket);
 	}
@@ -95,15 +95,15 @@ public abstract class AbstractSoftware implements Software {
 	public DistributorStatus getStatus() { return status; }
 	public String getEmitLocation() { return emitLocation; }
 	public LocalDate getTicketsTime() {	return ticketsTime;	}
-	public List<AbstractTicket> getListSubs() { return listSubs; }
-	public List<AbstractTicket> getListTicket() { return listTicket; }	
+	public List<SubscriptionImp> getListSubs() { return listSubs; }
+	public List<SingleTicketImp> getListTicket() { return listTicket; }	
 	
 	// ====== Setters ======
 
 	public void setStatus(DistributorStatus status) { this.status = status; }	
 	public void setEmitLocation(String emitLocation) { this.emitLocation = emitLocation; }	
 	public void setTicketsTime(LocalDate ticketsTime) {	this.ticketsTime = ticketsTime;	}
-	public void setListSubs(List<AbstractTicket> listSubs) { this.listSubs = listSubs;	}
-	public void setListTicket(List<AbstractTicket> listTicket) { this.listTicket = listTicket;	}	
+	public void setListSubs(List<SubscriptionImp> listSubs) { this.listSubs = listSubs;	}
+	public void setListTicket(List<SingleTicketImp> listTicket) { this.listTicket = listTicket;	}	
 
 }
