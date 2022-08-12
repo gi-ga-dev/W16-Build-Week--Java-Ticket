@@ -11,6 +11,7 @@ import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 
 import it.project.card_and_user.UserImp;
+import it.project.system.AbstractSoftware;
 import it.project.system.DistributorImp;
 import it.project.system.RetailerImp;
 
@@ -36,31 +37,31 @@ public abstract class AbstractTicket {
 	private LocalDate expDate;
 	
 	@ManyToOne
-	private RetailerImp retailer;
-	
-	@ManyToOne
-	private DistributorImp distributor;
-	
-	public AbstractTicket(String company, int code, int price, LocalDate emitDate, LocalDate expDate) {
+	private AbstractSoftware emittedEntity;
+		
+	public AbstractTicket(String company, int code, int price, LocalDate emitDate, LocalDate expDate, AbstractSoftware emittedEntity) {
 		super();		
 		this.company = company;
 		this.code = code;
 		this.price = price;
 		this.emitDate = emitDate;
 		this.expDate = expDate;
+		this.emittedEntity = emittedEntity;
 	}	
 
 	public AbstractTicket() {
 		super();
-	}
-	
+	}	
+
 	// ====== Getters ======
+	
 	public Long getId() { return id; }
 	public int getCode() { return code;	}
 	public int getPrice() { return price; }
 	public String getCompany() { return company; }
 	public LocalDate getEmitDate() { return emitDate; }
 	public LocalDate getExpDate() {	return expDate;	}
+	public AbstractSoftware getEmittedEntity() { return emittedEntity; }
 	
 	// ====== Setters ======
 	
@@ -70,5 +71,6 @@ public abstract class AbstractTicket {
 	public void setCompany(String company) { this.company = company; }	
 	public void setEmitDate(LocalDate emitDate) { this.emitDate = emitDate;	}	
 	public void setExpDate(LocalDate expDate) {	this.expDate = expDate;	}
+	public void setEmittedEntity(AbstractSoftware emittedEntity) { this.emittedEntity = emittedEntity; }
 	
 }

@@ -11,6 +11,7 @@ import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
 import javax.persistence.OneToMany;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
@@ -34,11 +35,11 @@ public abstract class AbstractSoftware implements Software {
 	private Long id;
 	
 	@OneToMany(cascade = CascadeType.MERGE)
-	@Column(name = "subs_list")
+	@JoinColumn(name = "subs_list")
 	private List<SubscriptionImp> listSubs;	
 	
 	@OneToMany(cascade = CascadeType.MERGE)
-	@Column(name = "tickets_list")
+	@JoinColumn(name = "tickets_list")
 	private List<SingleTicketImp> listTicket;	
 	
 	@Column(name = "status")
@@ -71,18 +72,21 @@ public abstract class AbstractSoftware implements Software {
 	}
 		
 	@Override
-	public void emitSingleTicket(String company, int code, int price, LocalDate emitDate, LocalDate expDate) {
-		SingleTicketImp ticket = new SingleTicketImp(company, code, price, emitDate, expDate);
-		//getListTicket().add(ticket);
+	public void emitSingleTicket(String company, int code, int price, LocalDate emitDate, LocalDate expDate, AbstractSoftware emittedEntity) {
+		SingleTicketImp ticket = new SingleTicketImp(company, code, price, emitDate, expDate, emittedEntity);
+		emittedEntity.getListTicket().add(ticket);
 		SingleTicketDAO ticketDAO = new SingleTicketDAO();
 		ticketDAO.create(ticket);
 	}
 
 	@Override
 	public void emitSubscription(String company, int code, int price, LocalDate emitDate, LocalDate expDate,
-			Duration duration, CardImp card) {
+			Duration duration, CardImp card, AbstractSoftware emittedEntity) {
 		if (card.checkStatus()) {
-			SubscriptionImp subscription = new SubscriptionImp(company, code, price, emitDate, expDate, duration, card);
+			SubscriptionImp subscription = new SubscriptionImp(company, code, price, emitDate, expDate, duration, card, emittedEntity);
+			// lo aggiungo all'entita' che ha emesso la sub
+			emittedEntity.getListSubs().add(subscription);
+			// lo aggiungo alla lista delle card del cliente specifico
 			card.getListSubs().add(subscription);
 			SubscriptionDAO subDAO = new SubscriptionDAO();
 			subDAO.create(subscription);

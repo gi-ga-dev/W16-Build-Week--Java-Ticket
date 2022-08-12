@@ -50,18 +50,30 @@ public class Main {
 		
 		distDAO.create(distServ.getDistributor1());
 		
-		distServ.getDistributor1().emitSingleTicket("Cotral", 1, 3, LocalDate.now(), LocalDate.now().plusYears(1));
-		distServ.getDistributor1().emitSubscription("AutoGuidoVie", 1, 5, LocalDate.now(), LocalDate.now().plusYears(1), Duration.MONTHLY, cardServ.getCardClaudio());
+		distServ.getDistributor1().emitSingleTicket("Cotral", 10, 3, LocalDate.now(), LocalDate.now().plusYears(1), distServ.getDistributor1());
+		distServ.getDistributor1().emitSubscription("AutoGuidoVie", 10, 5, LocalDate.now(), LocalDate.now().plusYears(1), Duration.MONTHLY, cardServ.getCardClaudio(), distServ.getDistributor1());
 		
 		distServ.getDistributor1().setListTicket(distServ.getDistributor1().getListTicket());
 		distServ.getDistributor1().setListSubs(distServ.getDistributor1().getListSubs());
 		
 		distDAO.update(distServ.getDistributor1());
 		
-		RetailerImp retailer = new RetailerImp();
-		retailer.emitSingleTicket("Cotral", 1, 3, LocalDate.now(), LocalDate.now().plusYears(1));
-		retailer.emitSubscription("AutoGuidoVie", 1, 5, LocalDate.now(), LocalDate.now().plusYears(1), Duration.MONTHLY, cardServ.getCardClaudio());
-			
+		// ------------------------------------------
+		
+		distDAO.create(distServ.getDistributor2());
+		
+		distServ.getDistributor2().emitSingleTicket("Atac", 20, 3, LocalDate.now(), LocalDate.now().plusYears(1), distServ.getDistributor2());
+		distServ.getDistributor2().emitSubscription("Seatour", 20, 5, LocalDate.now(), LocalDate.now().plusYears(1), Duration.MONTHLY, cardServ.getCardClaudio(), distServ.getDistributor2());
+		
+		distServ.getDistributor2().setListTicket(distServ.getDistributor2().getListTicket());
+		distServ.getDistributor2().setListSubs(distServ.getDistributor2().getListSubs());
+		
+		distDAO.update(distServ.getDistributor2());
+		
+//		RetailerImp retailer = new RetailerImp();
+//		retailer.emitSingleTicket("Cotral", 1, 3, LocalDate.now(), LocalDate.now().plusYears(1));
+//		retailer.emitSubscription("AutoGuidoVie", 1, 5, LocalDate.now(), LocalDate.now().plusYears(1), Duration.MONTHLY, cardServ.getCardClaudio());
+//			
 		cardDAO.update(cardServ.getCardClaudio()); // aggiorno carta
 		userDAO.update(userServ.getClaudio());     // aggiorno utente			
 		

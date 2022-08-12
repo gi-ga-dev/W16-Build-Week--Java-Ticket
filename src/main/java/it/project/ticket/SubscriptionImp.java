@@ -5,6 +5,7 @@ import javax.persistence.Entity;
 import javax.persistence.ManyToOne;
 import it.project.card_and_user.CardImp;
 import it.project.card_and_user.UserImp;
+import it.project.system.AbstractSoftware;
 
 @Entity
 public class SubscriptionImp extends AbstractTicket {
@@ -15,8 +16,8 @@ public class SubscriptionImp extends AbstractTicket {
 	private CardImp card;
 
 	public SubscriptionImp(String company, int code, int price, LocalDate emitDate, LocalDate expDate,
-			Duration duration, CardImp card) {
-		super(company, code, price, emitDate, expDate);		
+			Duration duration, CardImp card, AbstractSoftware emittedEntity) {
+		super(company, code, price, emitDate, expDate, emittedEntity);		
 		this.duration = duration;
 		this.card = card;
 	}

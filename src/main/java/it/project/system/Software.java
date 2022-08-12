@@ -8,7 +8,7 @@ import it.project.ticket.Duration;
 
 public interface Software {
 	
-	void emitSingleTicket(String company, int code, int price, LocalDate emitDate, LocalDate expDate);
+	void emitSingleTicket(String company, int code, int price, LocalDate emitDate, LocalDate expDate, AbstractSoftware emittedEntity);
 	
-	void emitSubscription(String company, int code, int price, LocalDate emitDate, LocalDate expDate, Duration duration, CardImp card);
+	void emitSubscription(String company, int code, int price, LocalDate emitDate, LocalDate expDate, Duration duration, CardImp card, AbstractSoftware emittedEntity);
 }
