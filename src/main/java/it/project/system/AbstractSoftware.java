@@ -11,6 +11,8 @@ import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.Inheritance;
+import javax.persistence.InheritanceType;
 import javax.persistence.JoinColumn;
 import javax.persistence.OneToMany;
 import javax.persistence.SequenceGenerator;
@@ -34,11 +36,11 @@ public abstract class AbstractSoftware implements Software {
 	@Column(name = "id")
 	private Long id;
 	
-	@OneToMany(cascade = CascadeType.MERGE)
+	@OneToMany
 	@JoinColumn(name = "subs_list")
 	private List<SubscriptionImp> listSubs;	
 	
-	@OneToMany(cascade = CascadeType.MERGE)
+	@OneToMany
 	@JoinColumn(name = "tickets_list")
 	private List<SingleTicketImp> listTicket;	
 	

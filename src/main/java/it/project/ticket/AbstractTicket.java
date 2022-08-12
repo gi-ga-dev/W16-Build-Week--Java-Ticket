@@ -1,12 +1,19 @@
 package it.project.ticket;
 
 import java.time.LocalDate;
+import java.util.List;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.Inheritance;
+import javax.persistence.InheritanceType;
+import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.NamedQuery;
+import javax.persistence.OneToMany;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 
@@ -17,6 +24,7 @@ import it.project.system.RetailerImp;
 
 @Entity
 @Table(name="tickets_and_subs", schema="ele_transport")
+@NamedQuery(name="ticketByEmitDate", query="SELECT ele FROM AbstractTicket ele WHERE ele.emitDate =:emitDate")
 public abstract class AbstractTicket {
 	
 	@Id
@@ -34,8 +42,8 @@ public abstract class AbstractTicket {
 	@Column(name = "emitDate")
 	private LocalDate emitDate;
 	@Column(name = "expDate")
-	private LocalDate expDate;
-	
+	private LocalDate expDate;		
+			
 	@ManyToOne
 	private AbstractSoftware emittedEntity;
 		

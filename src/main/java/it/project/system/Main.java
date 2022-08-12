@@ -2,7 +2,6 @@ package it.project.system;
 
 import java.io.ObjectInputFilter.Status;
 import java.time.LocalDate;
-
 import it.project.all_dao.CardDAO;
 import it.project.all_dao.DistributorDAO;
 import it.project.all_dao.RetailerDAO;
@@ -21,7 +20,7 @@ public class Main {
 
 	public static void main(String[] args) {
 		
-		// ====== Metodi Prosciutto CRUD =======
+		// ====== Metodi Prosciutto CRUD =======		
 		
 		// ==== Referenze Classi DAO/Service ====
 		UserDAO userDAO = new UserDAO();
@@ -57,6 +56,9 @@ public class Main {
 		distServ.getDistributor1().setListSubs(distServ.getDistributor1().getListSubs());
 		
 		distDAO.update(distServ.getDistributor1());
+		
+		ticketDAO.searchByEmitDate(LocalDate.now());
+		
 		
 		// ------------------------------------------
 		
